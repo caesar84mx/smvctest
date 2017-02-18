@@ -56,7 +56,7 @@ public class UserController
 
         ArrayList<Integer> pages = new ArrayList<>();
 
-        for (int i = 1; i <= getTotalPages(userService.getRecordsNumber(), resultsPerPage); i++)
+        for (int i = 1; i <= getTotalPages(usersList.size(), resultsPerPage); i++)
         {
             pages.add(i);
         }
