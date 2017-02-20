@@ -22,7 +22,7 @@ import java.util.List;
 public class UserController
 {
     private UserService userService;
-    private String lastPassedNameParam;
+    //private String lastPassedNameParam;
 
     @Autowired(required = true)
     @Qualifier(value = "userService")
@@ -48,11 +48,12 @@ public class UserController
         return "userlist";
     }
 
-    @RequestMapping(value = "/userdata/{pageNum}", method = RequestMethod.GET)
-    public String userData(@PathVariable("pageNum") int pageNum, Model model)
+    @RequestMapping(value = "/userdata/{pageNum}/{searchRequest}", method = RequestMethod.GET)
+    public String userData(@PathVariable("pageNum") int pageNum, @PathVariable("searchRequest")
+                        String searchRequest, Model model)
     {
         int resultsPerPage = 5;
-        List<User> usersList = userService.getUsersByName(lastPassedNameParam, pageNum, resultsPerPage);
+        List<User> usersList = userService.getUsersByName(searchRequest, pageNum, resultsPerPage);
 
         ArrayList<Integer> pages = new ArrayList<>();
 
@@ -111,9 +112,7 @@ public class UserController
     @RequestMapping(value = "passnameparam")
     public synchronized String passParam(@ModelAttribute("nameParam") StringWrapper nameParam)
     {
-        lastPassedNameParam = nameParam.getValue();
-
-        return "redirect:/userdata/1";
+        return "redirect:/userdata/1/" + nameParam.getValue();
     }
 
     private long getTotalPages(long totalUsersNumber, int resultsPerPage) {
