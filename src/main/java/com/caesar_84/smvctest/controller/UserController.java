@@ -22,7 +22,6 @@ import java.util.List;
 public class UserController
 {
     private UserService userService;
-    //private String lastPassedNameParam;
 
     @Autowired(required = true)
     @Qualifier(value = "userService")
@@ -110,7 +109,7 @@ public class UserController
     }
 
     @RequestMapping(value = "passnameparam")
-    public synchronized String passParam(@ModelAttribute("nameParam") StringWrapper nameParam)
+    public String passParam(@ModelAttribute("nameParam") StringWrapper nameParam)
     {
         return "redirect:/userdata/1/" + nameParam.getValue();
     }
