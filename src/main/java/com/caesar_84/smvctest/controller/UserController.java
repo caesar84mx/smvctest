@@ -104,6 +104,7 @@ public class UserController
     public String findUserPage(Model model)
     {
         model.addAttribute("nameParam", new StringWrapper());
+
         return "finduser";
     }
 
@@ -115,7 +116,7 @@ public class UserController
         return "redirect:/userdata/1";
     }
 
-    public long getTotalPages(long totalUsersNumber, int resultsPerPage) {
+    private long getTotalPages(long totalUsersNumber, int resultsPerPage) {
         return totalUsersNumber % resultsPerPage == 0 ?
                 totalUsersNumber/resultsPerPage : (totalUsersNumber/resultsPerPage) + 1;
     }
